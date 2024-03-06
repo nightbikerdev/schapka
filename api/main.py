@@ -1,7 +1,9 @@
+import uuid
+
 from fastapi import FastAPI
 from typing import List
 
-from schemas.restaurant import Restaurant
+from schemas.restaurant import Restaurant, MealRequest, MealResponse, MealUpdate
 
 app = FastAPI()
 
@@ -18,11 +20,30 @@ def get_restaurants():
     return list()
 
 @app.get("/restaurants/{restaurant_id}", response_model=Restaurant)
-def get_restaurant(restaurant_id: int):
+def get_restaurant(restaurant_id: uuid.UUID):
     restaurant = Restaurant()
     return restaurant
 
 @app.put("/restaurants/{restaurant_id}", response_model=Restaurant)
-def update_restaurant(restaurant_id: int, updated_data: Restaurant):
+def update_restaurant(restaurant_id: uuid.UUID, updated_data: Restaurant):
     current_restaurant = Restaurant()
     return current_restaurant
+
+@app.post("/meals")
+def create_meal(meal: MealRequest):
+    pass
+
+@app.get("/meals", response_model=List[MealResponse])
+def get_restaurants():
+    return list()
+
+@app.get("/meals/{meal_id}", response_model=MealResponse)
+def get_restaurant(meal_id: uuid.UUID):
+    restaurant = Restaurant()
+    return restaurant
+
+@app.put("/meals/{meal_id}", response_model=MealResponse)
+def update_restaurant(meal_id: uuid.UUID, updated_data: MealUpdate):
+    current_meal = MealResponse()
+    return current_meal
+
