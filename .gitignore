@@ -2,3 +2,4 @@
 api/venv/
 api/__pycache__/
 api/schemas/__pycache__/
+api/.env

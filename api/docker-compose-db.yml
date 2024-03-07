@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  api-db:
+    image: postgres:14.7-bullseye
+    container_name: api-db
+    env_file:
+      - .env
+    ports:
+      - ${POSTGRES_DB_HOST_FORWARD_PORT}:5432
+    restart: always
+    volumes:
+      - api-db-data:/var/lib/postgresql/data
+
+volumes:
+  api-db-data:
