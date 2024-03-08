@@ -22,4 +22,8 @@ class MealResponse(BaseModel):
 class MealUpdate(BaseModel):
     restaurant_id: uuid.UUID
     name: str
-    review: ReviewMeal  
+    review: ReviewMeal
+
+class ReviewMeal(BaseModel):
+    review: str
+    stars: int
