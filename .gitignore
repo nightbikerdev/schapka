@@ -1,5 +1,6 @@
 .idea/
+.vscode/
+__pycache__/
+.pytest_cache/
 api/venv/
-api/__pycache__/
-api/schemas/__pycache__/
 api/.env

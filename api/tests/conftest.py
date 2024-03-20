@@ -1,18 +1,24 @@
-import pytest
-from sqlalchemy import create_engine
+import pytest_asyncio
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from ..database import Base, get_db_url
+from app.db.config import Base, SQLALCHEMY_DATABASE_URL
 
-@pytest.fixture(scope="session")
+@pytest_asyncio.fixture(scope="session")
 def engine():
-    engine = create_engine(get_db_url(), echo=True)
+    engine = create_async_engine(SQLALCHEMY_DATABASE_URL, echo=True)
     Base.metadata.create_all(engine)
     yield engine
     engine.dispose()
 
-@pytest.fixture(scope="session")
-def session(engine):
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    yield session
-    session.close()
+
+@pytest_asyncio.fixture(scope="function")
+async def async_db_session(async_db_engine):
+    async_session = sessionmaker(
+        bind=async_db_engine,
+        expire_on_commit=False,
+        autocommit=False,
+        autoflush=False,
+        class_=AsyncSession,
+    )
+    async with async_session() as session:
+        yield session
