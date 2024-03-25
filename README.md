@@ -5,3 +5,4 @@ Because life's too short for bland chops – let's make every meal a schab-tasti
 # WorkLog
 * After analyzing the application requirements, two technologies have been selected for the project. **FastAPI** has been chosen for the backend, while **Flutter** has been chosen for the frontend.
 
+
